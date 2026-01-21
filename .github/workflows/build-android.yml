@@ -20,12 +20,13 @@ jobs:
           expo-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: 📂 Injetar Google Services
-        # Criamos a estrutura de pastas nativa e colocamos o arquivo lá manualmente
+      - name: 📂 Injetar Google Services (Ajuste Técnico)
+        # Este comando cria a pasta NO SERVIDOR e copia o arquivo da sua RAIZ para lá
         run: |
           mkdir -p android/app
           cp google-services.json android/app/google-services.json || true
-          ls -R android/app
+          echo "Verificando se o arquivo foi injetado no servidor:"
+          ls -la android/app/google-services.json
 
       - name: 📦 Install PNPM
         run: corepack enable && corepack prepare pnpm@latest --activate
@@ -34,5 +35,5 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: 🚀 Build APK
-        # O uso do --clear-cache é fundamental para limpar os erros de path anteriores
+        # O clear-cache limpa os erros de caminhos antigos que ficaram na memória do Expo
         run: npx eas-cli build --platform android --profile production --local --non-interactive --clear-cache
