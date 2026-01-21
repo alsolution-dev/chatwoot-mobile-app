@@ -13,7 +13,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          # Removi a linha de cache que causou o erro anterior
 
       - name: 🏗 Setup Expo
         uses: expo/expo-github-action@v8
@@ -22,7 +22,11 @@ jobs:
           token: ${{ secrets.EXPO_TOKEN }}
 
       - name: 📦 Install dependencies
-        run: npm install
+        # Note que no seu print existe um arquivo pnpm-lock.yaml. 
+        # Vamos usar o comando do pnpm para garantir compatibilidade.
+        run: |
+          corepack enable
+          pnpm install --no-frozen-lockfile
 
       - name: 🚀 Build APK
-        run: npx eas-build --platform android --profile preview --local
+        run: npx eas-cli build --platform android --profile preview --local --non-interactive
