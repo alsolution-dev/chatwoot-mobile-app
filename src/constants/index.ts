@@ -36,55 +36,23 @@ export const AUDIO_FORMATS = {
 export const MAXIMUM_FILE_UPLOAD_SIZE = 20;
 
 export const CONVERSATION_STATUSES = [
-  {
-    key: 'open',
-    name: 'Open',
-  },
-  {
-    key: 'resolved',
-    name: 'Resolved',
-  },
-  {
-    key: 'pending',
-    name: 'Pending',
-  },
-  {
-    key: 'snoozed',
-    name: 'Snoozed',
-  },
-  {
-    key: 'all',
-    name: 'All',
-  },
+  { key: 'open', name: 'Open' },
+  { key: 'resolved', name: 'Resolved' },
+  { key: 'pending', name: 'Pending' },
+  { key: 'snoozed', name: 'Snoozed' },
+  { key: 'all', name: 'All' },
 ];
+
 export const SORT_TYPES = [
-  {
-    key: 'latest',
-    name: 'Latest',
-  },
-  {
-    key: 'sort_on_created_at',
-    name: 'Created At',
-  },
-  {
-    key: 'sort_on_priority',
-    name: 'Priority',
-  },
+  { key: 'latest', name: 'Latest' },
+  { key: 'sort_on_created_at', name: 'Created At' },
+  { key: 'sort_on_priority', name: 'Priority' },
 ];
 
 export const ASSIGNEE_TYPES = [
-  {
-    key: 'mine',
-    name: 'Mine',
-  },
-  {
-    key: 'unassigned',
-    name: 'Unassigned',
-  },
-  {
-    key: 'all',
-    name: 'All',
-  },
+  { key: 'mine', name: 'Mine' },
+  { key: 'unassigned', name: 'Unassigned' },
+  { key: 'all', name: 'All' },
 ];
 
 export const CONVERSATION_STATUS = {
@@ -189,11 +157,13 @@ export const LANGUAGES = {
   zh: 'Chinese',
 };
 
+// AJUSTADO PARA O SEU DOMÍNIO AL-SOLUTION
 export const URL_REGEX = {
-  CONVERSATION: 'app/accounts/[-0-9]+/conversations/[-0-9]',
+  CONVERSATION: 'saas.alsolution.net.br/app/accounts/[-0-9]+/conversations/[-0-9]',
 };
 
-export const SSO_CALLBACK_URL = 'chatwootapp://auth/saml';
+// AJUSTADO PARA O SEU SCHEME PERSONALIZADO
+export const SSO_CALLBACK_URL = 'alsolutionapp://auth/saml';
 
 export const CONVERSATION_TOGGLE_STATUS = {
   open: 'RESOLVE',
