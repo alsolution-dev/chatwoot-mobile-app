@@ -20,9 +20,12 @@ jobs:
           expo-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: 📂 Verify Google Services
-        # Comando para listar o arquivo e confirmar que o Linux o vê
-        run: ls -la google-services.json
+      - name: 📂 Fix Google Services Path
+        # Este comando garante que o arquivo esteja presente onde o Prebuild procura
+        run: |
+          ls -la google-services.json
+          mkdir -p android/app
+          cp google-services.json android/app/google-services.json || true
 
       - name: 📦 Install PNPM
         run: corepack enable && corepack prepare pnpm@latest --activate
@@ -31,5 +34,5 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: 🚀 Build APK
-        # O clear-cache é vital aqui para esquecer o caminho errado anterior
+        # O uso do --clear-cache é obrigatório para aplicar as mudanças de caminho
         run: npx eas-cli build --platform android --profile production --local --non-interactive --clear-cache
