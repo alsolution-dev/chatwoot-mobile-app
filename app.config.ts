@@ -1,6 +1,10 @@
 import { ExpoConfig, ConfigContext } from 'expo/config';
+import path from 'path';
 
 export default ({ config }: ConfigContext): ExpoConfig => {
+  // Caminho absoluto para garantir que o build local encontre o arquivo
+  const googleServicePath = path.resolve(process.cwd(), 'google-services.json');
+
   return {
     name: 'AL-Solution Chat',
     slug: 'alsolution-chat',
@@ -26,8 +30,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         UIBackgroundModes: ['fetch', 'remote-notification'],
         ITSAppUsesNonExemptEncryption: false,
       },
-      // Caminho relativo à raiz
-      googleServicesFile: './google-services.json',
+      googleServicesFile: googleServicePath,
       entitlements: { 'aps-environment': 'production' },
       associatedDomains: ['applinks:saas.alsolution.net.br'],
     },
@@ -35,8 +38,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       adaptiveIcon: { foregroundImage: './assets/adaptive-icon.png', backgroundColor: '#ffffff' },
       package: 'br.net.alsolution.chatwoot',
       permissions: ['android.permission.CAMERA', 'android.permission.RECORD_AUDIO'],
-      // Caminho relativo à raiz
-      googleServicesFile: './google-services.json',
+      googleServicesFile: googleServicePath,
       intentFilters: [
         {
           action: 'VIEW',
