@@ -53,8 +53,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     extra: {
       eas: {
-        // Removido o process.env para evitar erros de projeto não inicializado
-        projectId: "alsolution-chat-project", 
+        // Deixando como undefined para permitir que o comando project:init crie um ID válido
+        projectId: undefined,
       },
     },
     plugins: [
