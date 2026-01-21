@@ -53,7 +53,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     extra: {
       eas: {
-        projectId: undefined,
+        // ID REAL CONFIRMADO NO SEU PAINEL EXPO
+        projectId: "daec7403-6417-4afa-be86-18ead645d294",
       },
     },
     plugins: [
