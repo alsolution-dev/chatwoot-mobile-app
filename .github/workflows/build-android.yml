@@ -27,7 +27,9 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: 🚀 Build APK
-        # O comando project:init resolve o erro de "EAS project not configured"
         run: |
-          npx eas-cli project:init --non-interactive || true
+          # Inicializa o projeto no Expo vinculado ao seu Token
+          npx eas-cli project:init --non-interactive
+          
+          # Realiza o build local do APK usando o perfil de produção
           npx eas-cli build --platform android --profile production --local --non-interactive
