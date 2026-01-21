@@ -24,9 +24,8 @@ jobs:
         run: corepack enable && corepack prepare pnpm@latest --activate
 
       - name: 📦 Install dependencies
-        # O comando '--no-frozen-lockfile' evita erros se o arquivo de lock estiver ausente
         run: pnpm install --no-frozen-lockfile
 
       - name: 🚀 Build APK
-        # Adicionei o comando --no-install para garantir que ele use o que foi instalado no passo anterior
-        run: npx eas-cli build --platform android --profile preview --local --non-interactive --no-install
+        # Comando corrigido sem o argumento inesperado
+        run: npx eas-cli build --platform android --profile preview --local --non-interactive
