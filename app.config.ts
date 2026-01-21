@@ -2,7 +2,7 @@ import { ExpoConfig, ConfigContext } from 'expo/config';
 
 export default ({ config }: ConfigContext): ExpoConfig => {
   return {
-    name: 'AL-Solution Chat', // Nome do seu aplicativo
+    name: 'AL-Solution Chat',
     slug: 'alsolution-chat',
     version: '4.3.13',
     orientation: 'portrait',
@@ -18,27 +18,23 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     ios: {
       supportsTablet: true,
-      bundleIdentifier: 'br.net.alsolution.chatwoot', // Seu ID fixo
+      bundleIdentifier: 'br.net.alsolution.chatwoot',
       infoPlist: {
-        NSCameraUsageDescription:
-          'This app requires access to the camera to upload images and videos.',
-        NSPhotoLibraryUsageDescription:
-          'This app requires access to the photo library to upload images.',
+        NSCameraUsageDescription: 'This app requires access to the camera to upload images and videos.',
+        NSPhotoLibraryUsageDescription: 'This app requires access to the photo library to upload images.',
         NSMicrophoneUsageDescription: 'This app requires access to the microphone to record audio.',
-        NSAppleMusicUsageDescription:
-          'This app does not use Apple Music, but a system API may require this permission.',
         UIBackgroundModes: ['fetch', 'remote-notification'],
         ITSAppUsesNonExemptEncryption: false,
       },
-      googleServicesFile: './google-services.json', // Apontando para o arquivo na raiz
+      googleServicesFile: './google-services.json',
       entitlements: { 'aps-environment': 'production' },
-      associatedDomains: ['applinks:saas.alsolution.net.br'], // Seu domínio
+      associatedDomains: ['applinks:saas.alsolution.net.br'],
     },
     android: {
       adaptiveIcon: { foregroundImage: './assets/adaptive-icon.png', backgroundColor: '#ffffff' },
-      package: 'br.net.alsolution.chatwoot', // Seu ID fixo
+      package: 'br.net.alsolution.chatwoot',
       permissions: ['android.permission.CAMERA', 'android.permission.RECORD_AUDIO'],
-      googleServicesFile: './google-services.json', // Apontando para o arquivo na raiz
+      googleServicesFile: './google-services.json',
       intentFilters: [
         {
           action: 'VIEW',
@@ -46,18 +42,9 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           data: [
             {
               scheme: 'https',
-              host: 'saas.alsolution.net.br', // Seu domínio
+              host: 'saas.alsolution.net.br',
               pathPrefix: '/app/accounts/',
               pathPattern: '/*/conversations/*',
-            },
-          ],
-          category: ['BROWSABLE', 'DEFAULT'],
-        },
-        {
-          action: 'VIEW',
-          data: [
-            {
-              scheme: 'alsolutionapp',
             },
           ],
           category: ['BROWSABLE', 'DEFAULT'],
@@ -66,22 +53,13 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     extra: {
       eas: {
-        projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
-        storybookEnabled: process.env.EXPO_STORYBOOK_ENABLED,
+        // Removido o process.env para evitar erros de projeto não inicializado
+        projectId: "alsolution-chat-project", 
       },
     },
-    // Removi o owner 'chatwoot' para usar o seu próprio no build
     plugins: [
       'expo-font',
       ['react-native-permissions', { iosPermissions: ['Camera', 'PhotoLibrary', 'MediaLibrary'] }],
-      [
-        '@sentry/react-native/expo',
-        {
-          url: 'https://sentry.io/',
-          project: process.env.EXPO_PUBLIC_SENTRY_PROJECT_NAME,
-          organization: process.env.EXPO_PUBLIC_SENTRY_ORG_NAME,
-        },
-      ],
       '@react-native-firebase/app',
       '@react-native-firebase/messaging',
       [
