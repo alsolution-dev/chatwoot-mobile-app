@@ -27,5 +27,5 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: 🚀 Build APK
-        # Comando corrigido sem o argumento inesperado
-        run: npx eas-cli build --platform android --profile preview --local --non-interactive
+        # Alterado de 'preview' para 'production' para alinhar com seu eas.json
+        run: npx eas-cli build --platform android --profile production --local --non-interactive
