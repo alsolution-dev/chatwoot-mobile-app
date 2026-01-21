@@ -26,8 +26,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         UIBackgroundModes: ['fetch', 'remote-notification'],
         ITSAppUsesNonExemptEncryption: false,
       },
-      // Caminho simplificado para evitar erro de cópia
-      googleServicesFile: 'google-services.json',
+      // Caminho explícito para a raiz
+      googleServicesFile: './google-services.json',
       entitlements: { 'aps-environment': 'production' },
       associatedDomains: ['applinks:saas.alsolution.net.br'],
     },
@@ -35,8 +35,8 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       adaptiveIcon: { foregroundImage: './assets/adaptive-icon.png', backgroundColor: '#ffffff' },
       package: 'br.net.alsolution.chatwoot',
       permissions: ['android.permission.CAMERA', 'android.permission.RECORD_AUDIO'],
-      // Caminho simplificado para evitar erro de cópia
-      googleServicesFile: 'google-services.json',
+      // Caminho explícito para a raiz
+      googleServicesFile: './google-services.json',
       intentFilters: [
         {
           action: 'VIEW',
