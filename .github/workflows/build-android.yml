@@ -24,8 +24,11 @@ jobs:
         run: corepack enable && corepack prepare pnpm@latest --activate
 
       - name: 📦 Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: |
+          pnpm install --no-frozen-lockfile
+          # Aprova scripts de build para evitar travamentos em pacotes como sentry e esbuild
+          pnpm approve-builds || true
 
       - name: 🚀 Build APK
-        # Comando para forçar a limpeza e recriação dos arquivos nativos
+        # Limpa o cache para forçar o prebuild com as novas versões de SDK
         run: npx eas-cli build --platform android --profile production --local --non-interactive --clear-cache
