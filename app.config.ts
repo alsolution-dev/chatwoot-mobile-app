@@ -53,7 +53,6 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     extra: {
       eas: {
-        // Deixando como undefined para permitir que o comando project:init crie um ID válido
         projectId: undefined,
       },
     },
