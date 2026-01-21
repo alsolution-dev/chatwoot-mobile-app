@@ -27,5 +27,5 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: 🚀 Build APK
-        # O comando --clear-cache garante que o GitHub busque a nova Keystore na nuvem do Expo
+        # Comando para forçar a limpeza e recriação dos arquivos nativos
         run: npx eas-cli build --platform android --profile production --local --non-interactive --clear-cache
