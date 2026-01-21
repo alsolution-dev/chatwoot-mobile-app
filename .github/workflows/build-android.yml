@@ -27,5 +27,5 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: 🚀 Build APK
-        # Agora que o ID está no app.config.ts, rodamos direto o build
-        run: npx eas-cli build --platform android --profile production --local --non-interactive
+        # Comando ajustado para usar as credenciais que o seu projeto já tem
+        run: npx eas-cli build --platform android --profile production --local --non-interactive --clear-cache
