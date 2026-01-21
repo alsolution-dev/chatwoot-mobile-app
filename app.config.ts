@@ -66,14 +66,13 @@ export default ({ config }: ConfigContext): ExpoConfig => {
         {
           android: {
             minSdkVersion: 24,
-            compileSdkVersion: 35,
-            targetSdkVersion: 35,
+            compileSdkVersion: 34,
+            targetSdkVersion: 34,
             enableProguardInReleaseBuilds: true,
           },
           ios: { useFrameworks: 'static' },
         },
       ],
-      './with-ffmpeg-pod.js',
     ],
     androidNavigationBar: { backgroundColor: '#ffffff' },
   };
