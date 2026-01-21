@@ -27,5 +27,5 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: 🚀 Build APK
-        # Comando ajustado para usar as credenciais que o seu projeto já tem
+        # O comando --clear-cache garante que o GitHub busque a nova Keystore na nuvem do Expo
         run: npx eas-cli build --platform android --profile production --local --non-interactive --clear-cache
