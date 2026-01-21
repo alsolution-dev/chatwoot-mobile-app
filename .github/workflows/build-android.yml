@@ -20,9 +20,9 @@ jobs:
           expo-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: 📂 Verify Files
-        # Garante que o arquivo google-services.json está presente
-        run: ls -la google-services.json || echo "ARQUIVO NAO ENCONTRADO"
+      - name: 📂 Verify Google Services
+        # Comando para listar o arquivo e confirmar que o Linux o vê
+        run: ls -la google-services.json
 
       - name: 📦 Install PNPM
         run: corepack enable && corepack prepare pnpm@latest --activate
@@ -31,5 +31,5 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: 🚀 Build APK
-        # Agora o processo deve conseguir copiar o arquivo corretamente
+        # O clear-cache é vital aqui para esquecer o caminho errado anterior
         run: npx eas-cli build --platform android --profile production --local --non-interactive --clear-cache
