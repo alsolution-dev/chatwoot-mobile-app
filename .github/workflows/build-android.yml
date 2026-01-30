@@ -14,14 +14,14 @@ jobs:
         with:
           node-version: 20
 
-      - name: 📂 Injetar Google Services (Hard Fix)
-        # Criamos o arquivo e o colocamos na raiz e na pasta android/app ANTES de qualquer comando
+      - name: 📂 Injetar Google Services (Solução Definitiva)
+        # Criamos o arquivo e forçamos o Git a rastreá-lo para o EAS não o ignorar
         run: |
           echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > google-services.json
-          mkdir -p android/app
-          cp google-services.json android/app/google-services.json
+          git config --global user.email "felipe@alsolution.net.br"
+          git config --global user.name "Felipe Alves"
+          git add -f google-services.json
           ls -la google-services.json
-          ls -la android/app/google-services.json
 
       - name: 📦 Setup PNPM e EAS
         run: |
