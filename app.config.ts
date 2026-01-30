@@ -1,36 +1,36 @@
-import { ExpoConfig, ConfigContext } from 'expo/config';
-
-export default ({ config }: ConfigContext): ExpoConfig => {
+export default ({ config }) => {
   return {
     ...config,
     name: 'AL-Solution Chat',
     slug: 'alsolution-chat',
     version: '4.3.13',
-    ios: ***
+    ios: {
       bundleIdentifier: 'br.net.alsolution.chatwoot',
       googleServicesFile: 'google-services.json',
-    ***,
-    android: ***
+    },
+    android: {
       package: 'br.net.alsolution.chatwoot',
       googleServicesFile: 'google-services.json',
-    ***,
-    extra: ***
-      eas: *** projectId: "daec7403-6417-4afa-be86-18ead645d294" ***,
-    ***,
+    },
+    extra: {
+      eas: {
+        projectId: "daec7403-6417-4afa-be86-18ead645d294"
+      }
+    },
     plugins: [
       'expo-font',
       '@react-native-firebase/app',
       '@react-native-firebase/messaging',
       [
         'expo-build-properties',
-        ***
-          android: ***
+        {
+          android: {
             compileSdkVersion: 34,
             targetSdkVersion: 34,
-            minSdkVersion: 24,
-          ***
-        ***
-      ],
-    ],
+            minSdkVersion: 24
+          }
+        }
+      ]
+    ]
   };
 };
