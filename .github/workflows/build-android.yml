@@ -20,14 +20,6 @@ jobs:
           expo-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: 📂 Injeção Manual do Google Services
-        # Criamos a pasta que o Android exige e copiamos o arquivo manualmente
-        run: |
-          mkdir -p android/app
-          cp google-services.json android/app/google-services.json || true
-          echo "Verificando se o arquivo está no local correto para o Android:"
-          ls -la android/app/google-services.json
-
       - name: 📦 Install PNPM
         run: corepack enable && corepack prepare pnpm@latest --activate
 
@@ -35,5 +27,5 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: 🚀 Build APK
-        # O clear-cache é vital para limpar os caminhos errados das tentativas anteriores
+        # O clear-cache é fundamental para não usar caminhos errados do build anterior
         run: npx eas-cli build --platform android --profile production --local --non-interactive --clear-cache
