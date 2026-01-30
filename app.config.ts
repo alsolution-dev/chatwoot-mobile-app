@@ -1,10 +1,6 @@
 import { ExpoConfig, ConfigContext } from 'expo/config';
-import path from 'path';
 
 export default ({ config }: ConfigContext): ExpoConfig => {
-  // Calculamos o caminho absoluto para o arquivo na raiz do projeto
-  const googleServicePath = path.resolve(__dirname, 'google-services.json');
-
   return {
     name: 'AL-Solution Chat',
     slug: 'alsolution-chat',
@@ -21,21 +17,19 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     ios: {
       bundleIdentifier: 'br.net.alsolution.chatwoot',
-      googleServicesFile: googleServicePath, // Caminho absoluto injetado
-      supportsTablet: true,
+      googleServicesFile: './google-services.json',
     },
     android: {
       package: 'br.net.alsolution.chatwoot',
-      googleServicesFile: googleServicePath, // Caminho absoluto injetado
+      // Apontamos para o local onde vamos injetar o arquivo manualmente
+      googleServicesFile: './google-services.json',
       adaptiveIcon: {
         foregroundImage: './assets/adaptive-icon.png',
         backgroundColor: '#ffffff',
       },
     },
     extra: {
-      eas: {
-        projectId: "daec7403-6417-4afa-be86-18ead645d294",
-      },
+      eas: { projectId: "daec7403-6417-4afa-be86-18ead645d294" },
     },
     plugins: [
       'expo-font',
