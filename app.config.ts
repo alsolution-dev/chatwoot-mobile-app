@@ -8,11 +8,11 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     version: '4.3.13',
     ios: {
       bundleIdentifier: 'br.net.alsolution.chatwoot',
-      googleServicesFile: './google-services.json',
+      googleServicesFile: 'google-services.json',
     },
     android: {
       package: 'br.net.alsolution.chatwoot',
-      googleServicesFile: './google-services.json',
+      googleServicesFile: 'google-services.json',
     },
     extra: {
       eas: { projectId: "daec7403-6417-4afa-be86-18ead645d294" },
