@@ -2,7 +2,8 @@ import { ExpoConfig, ConfigContext } from 'expo/config';
 import path from 'path';
 
 export default ({ config }: ConfigContext): ExpoConfig => {
-  const googlePath = path.resolve(__dirname, 'google-services.json');
+  // Calculamos o caminho absoluto para o arquivo na raiz do projeto
+  const googleServicePath = path.resolve(__dirname, 'google-services.json');
 
   return {
     name: 'AL-Solution Chat',
@@ -20,11 +21,16 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     },
     ios: {
       bundleIdentifier: 'br.net.alsolution.chatwoot',
-      googleServicesFile: googlePath,
+      googleServicesFile: googleServicePath, // Caminho absoluto injetado
+      supportsTablet: true,
     },
     android: {
       package: 'br.net.alsolution.chatwoot',
-      googleServicesFile: googlePath, // Caminho absoluto corrigido
+      googleServicesFile: googleServicePath, // Caminho absoluto injetado
+      adaptiveIcon: {
+        foregroundImage: './assets/adaptive-icon.png',
+        backgroundColor: '#ffffff',
+      },
     },
     extra: {
       eas: {
@@ -41,7 +47,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
           android: {
             compileSdkVersion: 34,
             targetSdkVersion: 34,
-            buildToolsVersion: "34.0.0",
+            minSdkVersion: 24,
           },
         },
       ],
