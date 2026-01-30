@@ -14,29 +14,27 @@ jobs:
         with:
           node-version: 20
 
-      - name: 🏗 Setup Expo
-        uses: expo/expo-github-action@v8
-        with:
-          expo-version: latest
-          token: ${{ secrets.EXPO_TOKEN }}
-
-      - name: 📂 Debug e Injeção
+      - name: 📂 Injetar Google Services (Hard Fix)
+        # Criamos o arquivo e o colocamos na raiz e na pasta android/app ANTES de qualquer comando
         run: |
-          # Cria o arquivo a partir do seu secret
           echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > google-services.json
-          # Verifica se o arquivo tem conteúdo (não está vazio)
-          ls -la google-services.json
-          cat google-services.json | head -n 5
-          # Cria a pasta nativa por segurança
           mkdir -p android/app
           cp google-services.json android/app/google-services.json
+          ls -la google-services.json
+          ls -la android/app/google-services.json
 
-      - name: 📦 Install PNPM
-        run: corepack enable && corepack prepare pnpm@latest --activate
+      - name: 📦 Setup PNPM e EAS
+        run: |
+          corepack enable
+          corepack prepare pnpm@latest --activate
+          npm install -g eas-cli
 
       - name: 📦 Install dependencies
         run: pnpm install --no-frozen-lockfile
 
       - name: 🚀 Build APK
-        # O clear-cache é OBRIGATÓRIO para limpar o erro anterior
-        run: npx eas-cli build --platform android --profile production --local --non-interactive --clear-cache
+        # O clear-cache limpa o erro de caminho persistente que vimos no seu log
+        run: eas build --platform android --profile production --local --non-interactive --clear-cache
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          NODE_ENV: production
