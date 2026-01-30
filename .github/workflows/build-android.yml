@@ -20,13 +20,16 @@ jobs:
           expo-version: latest
           token: ${{ secrets.EXPO_TOKEN }}
 
-      - name: 📂 Injetar Google Services (Força Bruta)
-        # Este comando cria o arquivo na raiz e na pasta nativa simultaneamente
+      - name: 📂 Debug e Injeção
         run: |
+          # Cria o arquivo a partir do seu secret
           echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > google-services.json
+          # Verifica se o arquivo tem conteúdo (não está vazio)
+          ls -la google-services.json
+          cat google-services.json | head -n 5
+          # Cria a pasta nativa por segurança
           mkdir -p android/app
           cp google-services.json android/app/google-services.json
-          echo "Arquivo injetado com sucesso."
 
       - name: 📦 Install PNPM
         run: corepack enable && corepack prepare pnpm@latest --activate
@@ -35,4 +38,5 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: 🚀 Build APK
+        # O clear-cache é OBRIGATÓRIO para limpar o erro anterior
         run: npx eas-cli build --platform android --profile production --local --non-interactive --clear-cache
