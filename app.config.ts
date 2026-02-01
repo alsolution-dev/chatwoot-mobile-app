@@ -1,4 +1,11 @@
+import fs from 'fs';
+
 export default ({ config }) => {
+  // Se estivermos no ambiente de build (GitHub Actions), injetamos o JSON
+  if (process.env.GOOGLE_SERVICES_JSON_CONTENT) {
+    fs.writeFileSync('./google-services.json', process.env.GOOGLE_SERVICES_JSON_CONTENT);
+  }
+
   return {
     ...config,
     name: 'AL-Solution Chat',
@@ -6,11 +13,11 @@ export default ({ config }) => {
     version: '4.3.13',
     ios: {
       bundleIdentifier: 'br.net.alsolution.chatwoot',
-      googleServicesFile: 'google-services.json',
+      googleServicesFile: './google-services.json',
     },
     android: {
       package: 'br.net.alsolution.chatwoot',
-      googleServicesFile: 'google-services.json',
+      googleServicesFile: './google-services.json',
     },
     extra: {
       eas: {
