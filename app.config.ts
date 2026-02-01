@@ -10,14 +10,12 @@ export default ({ config }) => {
     name: 'AL-Solution Chat',
     slug: 'alsolution-chat',
     version: '4.3.13',
-    android: {
-      package: 'br.net.alsolution.chatwoot',
-      googleServicesFile: './google-services.json',
-      // Adicionamos suporte explícito para arquiteturas modernas
-      softwareKeyboardLayoutMode: "pan",
-    },
     ios: {
       bundleIdentifier: 'br.net.alsolution.chatwoot',
+      googleServicesFile: './google-services.json',
+    },
+    android: {
+      package: 'br.net.alsolution.chatwoot',
       googleServicesFile: './google-services.json',
     },
     extra: {
@@ -31,12 +29,23 @@ export default ({ config }) => {
         'expo-build-properties',
         {
           android: {
-            // MUDAMOS PARA 34 PARA GARANTIR COMPATIBILIDADE COM O S25 ULTRA
+            // Voltamos para o 34 para o S25 Ultra aceitar o arquivo
             compileSdkVersion: 34,
             targetSdkVersion: 34,
-            minSdkVersion: 24,
-            // Forçamos a compilação de bibliotecas estáveis
-            enableApex: false 
+            minSdkVersion: 24
+          }
+        }
+      ],
+      // ESTE PLUGIN VAI FORÇAR A VERSÃO CORRETA DO SPLASHSCREEN
+      [
+        "expo-build-properties",
+        {
+          android: {
+            extraMavenRepos: ["https://maven.google.com"],
+            // Forçamos o Gradle a ignorar a versão alpha02 e usar a estável
+            packagingOptions: {
+              pickFirst: ["**/libc++_shared.so"]
+            }
           }
         }
       ]
