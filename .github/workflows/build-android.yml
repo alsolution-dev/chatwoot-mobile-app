@@ -14,14 +14,6 @@ jobs:
         with:
           node-version: 20
 
-      - name: 📂 Injetar Google Services (Hard Fix)
-        run: |
-          echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > google-services.json
-          git config --global user.email "felipe@alsolution.net.br"
-          git config --global user.name "Felipe Alves"
-          git add -f google-services.json
-          ls -la google-services.json
-
       - name: 📦 Setup PNPM e EAS
         run: |
           corepack enable
@@ -35,4 +27,6 @@ jobs:
         run: eas build --platform android --profile production --local --non-interactive --clear-cache
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+          # Passamos o conteúdo do arquivo como variável de ambiente
+          GOOGLE_SERVICES_JSON_CONTENT: ${{ secrets.GOOGLE_SERVICES_JSON }}
           NODE_ENV: production
