@@ -29,23 +29,11 @@ export default ({ config }) => {
         'expo-build-properties',
         {
           android: {
-            // Voltamos para o 34 para o S25 Ultra aceitar o arquivo
             compileSdkVersion: 34,
             targetSdkVersion: 34,
-            minSdkVersion: 24
-          }
-        }
-      ],
-      // ESTE PLUGIN VAI FORÇAR A VERSÃO CORRETA DO SPLASHSCREEN
-      [
-        "expo-build-properties",
-        {
-          android: {
-            extraMavenRepos: ["https://maven.google.com"],
-            // Forçamos o Gradle a ignorar a versão alpha02 e usar a estável
-            packagingOptions: {
-              pickFirst: ["**/libc++_shared.so"]
-            }
+            minSdkVersion: 24,
+            // Isso ignora conflitos de bibliotecas que exigem versões maiores
+            extraMavenRepos: ["https://maven.google.com"]
           }
         }
       ]
