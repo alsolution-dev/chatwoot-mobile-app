@@ -1,7 +1,7 @@
 import fs from 'fs';
 
 export default ({ config }) => {
-  // Se estivermos no ambiente de build (GitHub Actions), injetamos o JSON
+  // Injeta o conteúdo do Secret no arquivo físico durante o build
   if (process.env.GOOGLE_SERVICES_JSON_CONTENT) {
     fs.writeFileSync('./google-services.json', process.env.GOOGLE_SERVICES_JSON_CONTENT);
   }
@@ -32,8 +32,9 @@ export default ({ config }) => {
         'expo-build-properties',
         {
           android: {
-            compileSdkVersion: 34,
-            targetSdkVersion: 34,
+            // AUMENTAMOS PARA 35 PARA RESOLVER O ERRO DO LOG
+            compileSdkVersion: 35,
+            targetSdkVersion: 35,
             minSdkVersion: 24
           }
         }
