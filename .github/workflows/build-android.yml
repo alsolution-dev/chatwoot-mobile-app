@@ -14,6 +14,14 @@ jobs:
         with:
           node-version: 20
 
+      - name: 📂 Injetar Google Services (Hard Fix)
+        # Este passo garante que o Google Services seja incluído no build local
+        run: |
+          echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > google-services.json
+          git config --global user.email "felipe@alsolution.net.br"
+          git config --global user.name "Felipe Alves"
+          git add -f google-services.json
+
       - name: 📦 Setup PNPM e EAS
         run: |
           corepack enable
@@ -24,9 +32,17 @@ jobs:
         run: pnpm install --no-frozen-lockfile
 
       - name: 🚀 Build APK
-        run: eas build --platform android --profile production --local --non-interactive --clear-cache
+        # Geramos o arquivo APK para que você possa instalar diretamente no celular
+        run: eas build --platform android --profile production --local --non-interactive --clear-cache --output=alsolution-chat.apk
         env:
           EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
-          # Passamos o conteúdo do arquivo como variável de ambiente
           GOOGLE_SERVICES_JSON_CONTENT: ${{ secrets.GOOGLE_SERVICES_JSON }}
           NODE_ENV: production
+
+      - name: 📦 Disponibilizar para Download
+        # Este é o comando que cria o botão de download na aba "Actions"
+        uses: actions/upload-artifact@v4
+        with:
+          name: instalador-alsolution-final
+          path: alsolution-chat.apk
+          retention-days: 1
